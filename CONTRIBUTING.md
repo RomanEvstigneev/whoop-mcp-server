@@ -379,4 +379,4 @@ We appreciate your interest in contributing to the Whoop MCP Server! Your contri
 
 ---
 
-**Questions?** Feel free to ask in our [GitHub discussions](https://github.com/yourusername/whoop-mcp-server/discussions) or open an issue!
+**Questions?** Feel free to ask in our [GitHub discussions](https://github.com/RomanEvstigneev/whoop-mcp-server/discussions) or open an issue!

@@ -35,7 +35,7 @@ A Model Context Protocol (MCP) server that provides [Claude Desktop](https://cla
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/whoop-mcp-server.git
+git clone https://github.com/RomanEvstigneev/whoop-mcp-server.git
 cd whoop-mcp-server
 
 # Run automated setup
@@ -126,7 +126,7 @@ We welcome contributions! Please see our [Contributing Guidelines](./CONTRIBUTIN
 
 - **Bug Reports**: Use our [bug report template](.github/ISSUE_TEMPLATE/bug_report.md)
 - **Feature Requests**: Use our [feature request template](.github/ISSUE_TEMPLATE/feature_request.md)
-- **Questions**: Check our [discussions](https://github.com/yourusername/whoop-mcp-server/discussions)
+- **Questions**: Check our [discussions](https://github.com/RomanEvstigneev/whoop-mcp-server/discussions)
 
 ## 📄 License
 

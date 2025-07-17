@@ -411,4 +411,4 @@ Use daily summary for multiple data points:
 
 ---
 
-**Questions?** Check our [GitHub discussions](https://github.com/yourusername/whoop-mcp-server/discussions) or open an issue!
+**Questions?** Check our [GitHub discussions](https://github.com/RomanEvstigneev/whoop-mcp-server/discussions) or open an issue!

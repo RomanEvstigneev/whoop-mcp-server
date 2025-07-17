@@ -30,7 +30,7 @@ Before starting, ensure you have:
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/whoop-mcp-server.git
+git clone https://github.com/RomanEvstigneev/whoop-mcp-server.git
 cd whoop-mcp-server
 
 # Install dependencies
@@ -293,4 +293,4 @@ You now have a fully functional Whoop MCP server integrated with Claude Desktop!
 
 ---
 
-**Need help?** Open an issue on GitHub or check our [discussions](https://github.com/yourusername/whoop-mcp-server/discussions) page!
+**Need help?** Open an issue on GitHub or check our [discussions](https://github.com/RomanEvstigneev/whoop-mcp-server/discussions) page!
