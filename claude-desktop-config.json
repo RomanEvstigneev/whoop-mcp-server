@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "whoop": {
+      "command": "node",
+      "args": ["index.js"],
+      "cwd": "/Users/romanevstigneev/whoop mcp-server/whoop-mcp-server",
+      "env": {
+        "WHOOP_CLIENT_ID": "your_client_id_here",
+        "WHOOP_CLIENT_SECRET": "your_client_secret_here",
+        "WHOOP_REFRESH_TOKEN": "your_refresh_token_here"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "whoop-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server providing Claude Desktop access to Whoop fitness and health data",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js",
+    "oauth": "node oauth-helper.js",
+    "setup": "./setup.sh"
+  },
+  "keywords": ["whoop", "mcp", "health", "fitness"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.1",
+    "axios": "^1.10.0",
+    "dotenv": "^17.2.0"
+  }
+}
