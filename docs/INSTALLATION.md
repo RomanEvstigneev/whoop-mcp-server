@@ -107,7 +107,7 @@ Add the WHOOP MCP server to your configuration:
 {
   "mcpServers": {
     "whoop": {
-      "command": "python",
+      "command": "/opt/miniconda3/bin/python",
       "args": ["/full/path/to/whoop-mcp-server/src/whoop_mcp_server.py"],
       "env": {
         "PYTHONPATH": "/full/path/to/whoop-mcp-server/src"
@@ -119,15 +119,21 @@ Add the WHOOP MCP server to your configuration:
 
 **Important Notes:**
 - Replace `/full/path/to/whoop-mcp-server` with the actual path to your installation
-- Use absolute paths, not relative paths
+- **Use absolute paths**, not relative paths
+- **Use full Python path**: Find your Python with `which python3` or `which python`
 - On Windows, use forward slashes (`/`) or escape backslashes (`\\\\`)
+- **Common Python paths:**
+  - macOS with Homebrew: `/opt/homebrew/bin/python3`
+  - macOS with Miniconda: `/opt/miniconda3/bin/python`
+  - Linux: `/usr/bin/python3`
+  - Windows: `C:/Python39/python.exe`
 
 ### Example Complete Configuration:
 ```json
 {
   "mcpServers": {
     "whoop": {
-      "command": "python",
+      "command": "/opt/miniconda3/bin/python",
       "args": ["/Users/username/whoop-mcp-server/src/whoop_mcp_server.py"],
       "env": {
         "PYTHONPATH": "/Users/username/whoop-mcp-server/src",
@@ -172,6 +178,96 @@ tail -f ~/Library/Logs/Claude/mcp-server-whoop.log
 
 ## Troubleshooting
 
+### Common Installation Issues
+
+#### Issue 1: "spawn python ENOENT" Error
+**Problem:** Claude Desktop can't find the Python interpreter.
+
+**Solution:**
+```bash
+# Find your Python path
+which python3
+# or
+which python
+
+# Use the full path in claude_desktop_config.json
+{
+  "mcpServers": {
+    "whoop": {
+      "command": "/opt/miniconda3/bin/python",  # ← Use full path here
+      "args": ["/path/to/whoop-mcp-server/src/whoop_mcp_server.py"]
+    }
+  }
+}
+```
+
+#### Issue 2: Manual OAuth Setup Required
+**Problem:** Interactive setup fails with "EOF when reading a line".
+
+**Manual Solution:**
+1. Get your authorization code from: https://personal-integrations-462307.uc.r.appspot.com/
+2. Exchange it manually:
+```bash
+python -c "
+import requests
+import json
+from pathlib import Path
+import os
+
+auth_code = 'YOUR_AUTHORIZATION_CODE_HERE'
+storage_dir = Path.home() / '.whoop-mcp-server'
+storage_dir.mkdir(exist_ok=True)
+
+url = f'https://personal-integrations-462307.uc.r.appspot.com/api/get-tokens/{auth_code}'
+response = requests.get(url, timeout=30)
+
+if response.status_code == 200:
+    token_data = response.json()
+    if token_data.get('success'):
+        token_file = storage_dir / 'tokens_raw.json'
+        with open(token_file, 'w') as f:
+            json.dump(token_data, f, indent=2)
+        os.chmod(token_file, 0o600)
+        print('✅ Tokens saved!')
+    else:
+        print('❌ Token exchange failed')
+else:
+    print(f'❌ HTTP Error: {response.status_code}')
+"
+```
+3. Then properly encrypt the tokens:
+```bash
+cd whoop-mcp-server
+python -c "
+import sys
+import json
+from pathlib import Path
+sys.path.insert(0, './src')
+from auth_manager import TokenManager
+
+storage_dir = Path.home() / '.whoop-mcp-server'
+raw_token_file = storage_dir / 'tokens_raw.json'
+
+with open(raw_token_file, 'r') as f:
+    token_data = json.load(f)
+
+token_manager = TokenManager()
+token_manager.save_tokens(token_data)
+
+token_info = token_manager.get_token_info()
+print(f'✅ Status: {token_info[\"status\"]}')
+
+raw_token_file.unlink()  # Clean up
+"
+```
+
+#### Issue 3: Wrong Configuration File
+**Problem:** Adding config to wrong file (e.g., `.claude.json` instead of `claude_desktop_config.json`).
+
+**Solution:** Ensure you're editing the correct file:
+- **Correct:** `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Incorrect:** `~/.claude.json` (this is for Claude Code, not Claude Desktop)
+
 ### Python Path Issues
 If you get import errors:
 
@@ -203,13 +299,18 @@ If Claude doesn't see the server:
 
 1. **Check JSON syntax** in config file using a JSON validator
 2. **Verify paths** are absolute and correct
-3. **Check permissions** on the script file:
+3. **Use full Python path** - avoid `python`, use the full path like `/opt/miniconda3/bin/python` or `/usr/local/bin/python3`
+4. **Check permissions** on the script file:
    ```bash
    chmod +x /path/to/whoop-mcp-server/src/whoop_mcp_server.py
    ```
-4. **Test server directly**:
+5. **Test server directly**:
    ```bash
-   python /path/to/whoop-mcp-server/src/whoop_mcp_server.py
+   /opt/miniconda3/bin/python /path/to/whoop-mcp-server/src/whoop_mcp_server.py
+   ```
+6. **Check Claude Desktop logs** for specific errors:
+   ```bash
+   tail -f ~/Library/Logs/Claude/mcp-server-whoop.log
    ```
 
 ### Network Issues

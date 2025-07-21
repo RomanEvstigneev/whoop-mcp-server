@@ -56,7 +56,7 @@ Add to your Claude Desktop settings:
 {
   "mcpServers": {
     "whoop": {
-      "command": "python",
+      "command": "/opt/miniconda3/bin/python",
       "args": ["/path/to/whoop-mcp-server/src/whoop_mcp_server.py"],
       "env": {
         "PYTHONPATH": "/path/to/whoop-mcp-server/src"
@@ -65,6 +65,8 @@ Add to your Claude Desktop settings:
   }
 }
 ```
+
+**⚠️ Important**: Use the full Python path (find yours with `which python3`)
 
 ### 5. Restart Claude Desktop
 
@@ -166,9 +168,11 @@ whoop-mcp-server/
 - Consider using cached data or reducing request frequency
 
 ### Claude Desktop doesn't see the server
-- Check that the path in `claude_desktop_config.json` is correct
+- **Use full Python path**: Change `"command": "python"` to `"command": "/opt/miniconda3/bin/python"` (use `which python3` to find yours)
+- **Check correct config file**: Edit `~/Library/Application Support/Claude/claude_desktop_config.json` (not `.claude.json`)
+- **Use absolute paths**: Full paths like `/Users/username/whoop-mcp-server/src/whoop_mcp_server.py`
+- **Check logs**: `tail -f ~/Library/Logs/Claude/mcp-server-whoop.log`
 - Restart Claude Desktop after configuration changes
-- Verify Python can be found in your PATH
 
 ## 🔄 Token Refresh
 

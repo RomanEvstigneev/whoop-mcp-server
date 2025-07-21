@@ -315,12 +315,34 @@ Add to Claude Desktop configuration:
 
 **Normal Operation:**
 ```
-Starting WHOOP MCP Server with FastMCP...
+Starting Final WHOOP MCP Server with FastMCP...
 Initializing WHOOP client...
 WHOOP auth status: valid
 FastMCP server ready
 Tool called: get_whoop_profile
 Profile result: John
+```
+
+**Python Path Issues:**
+```
+spawn python ENOENT
+/opt/miniconda3/bin/python: can't open file '/Users/user/whoop-mcp-server/src/final_whoop_server.py': [Errno 2] No such file or directory
+Server transport closed unexpectedly
+```
+
+**Solution for Python Path Issues:**
+1. Use full Python path in config:
+```json
+{
+  "command": "/opt/miniconda3/bin/python",  // Not just "python"
+  "args": ["/full/path/to/whoop-mcp-server/src/whoop_mcp_server.py"]
+}
+```
+
+2. Find your Python path:
+```bash
+which python3
+which python
 ```
 
 **Authentication Issues:**
