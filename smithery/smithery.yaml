@@ -1,0 +1,47 @@
+runtime: "typescript"
+
+# Configuration schema for user settings
+startCommand:
+  type: "http"
+  configSchema:
+    type: "object"
+    required: ["accessToken"]
+    properties:
+      accessToken:
+        type: "string"
+        title: "WHOOP Access Token"
+        description: "Your WHOOP API access token from OAuth authorization"
+        format: "password"
+      refreshToken:
+        type: "string"
+        title: "WHOOP Refresh Token (Optional)"
+        description: "Your WHOOP API refresh token for automatic renewal"
+        format: "password"
+      baseUrl:
+        type: "string"
+        title: "WHOOP API Base URL"
+        description: "WHOOP API base URL"
+        default: "https://api.prod.whoop.com/developer/v1"
+      cacheTimeout:
+        type: "integer"
+        title: "Cache Timeout (seconds)"
+        description: "How long to cache API responses"
+        default: 300
+        minimum: 60
+        maximum: 3600
+      rateLimitPerMinute:
+        type: "integer"
+        title: "Rate Limit per Minute"
+        description: "Maximum API requests per minute"
+        default: 100
+        minimum: 10
+        maximum: 1000
+  exampleConfig:
+    accessToken: "your_whoop_access_token_here"
+    refreshToken: "your_whoop_refresh_token_here"
+    baseUrl: "https://api.prod.whoop.com/developer/v1"
+    cacheTimeout: 300
+    rateLimitPerMinute: 100
+
+env:
+  NODE_ENV: "production"

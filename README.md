@@ -8,6 +8,8 @@
 
 Transform your WHOOP fitness data into actionable insights through natural language queries in Claude Desktop. Ask questions about your workouts, recovery, sleep patterns, and more - all while keeping your data secure and private.
 
+> 🚀 **NEW**: Try the [Smithery hosted version](./smithery/) for zero-setup deployment!
+
 ## ✨ Features
 
 🔐 **Secure OAuth Integration** - Safe WHOOP account connection with encrypted local storage  
@@ -18,6 +20,24 @@ Transform your WHOOP fitness data into actionable insights through natural langu
 🔄 **Auto Token Refresh** - Seamless experience with automatic authentication renewal
 
 ## 🚀 Quick Start
+
+### 🎯 Choose Your Deployment Method
+
+**Option A: Smithery Hosted (Recommended for beginners)**
+- ✅ Zero installation complexity
+- ✅ Automatic updates and maintenance
+- ✅ Enterprise-grade hosting
+- ➡️ **[Get started with Smithery](./smithery/README.md)**
+
+**Option B: Local Installation (Advanced users)**
+- ✅ Full control and privacy
+- ✅ No external dependencies
+- ✅ Customize and extend
+- ➡️ **Continue with local setup below**
+
+---
+
+## 📦 Local Installation
 
 ### 1. Prerequisites
 - Python 3.8+
@@ -137,16 +157,35 @@ Environment variables (optional):
 - `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
 - `LOG_FILE`: Log file path (default: console only)
 
+## 🆚 Deployment Comparison
+
+| Feature | [Smithery Hosted](./smithery/) | Local Installation |
+|---------|-----------------|-------------------|
+| **Setup Time** | ⚡ 2 minutes | ⏱️ 10-15 minutes |
+| **Complexity** | 🟢 Beginner-friendly | 🟡 Technical setup required |
+| **Maintenance** | ✅ Zero (auto-updates) | 🔧 Manual updates needed |
+| **Performance** | 🚀 Optimized hosting | 💻 Depends on local setup |
+| **Privacy** | 🌐 Hosted platform | 🔒 Fully local |
+| **Dependencies** | ❌ None | 🐍 Python, packages, OAuth |
+| **Troubleshooting** | 📞 Platform support | 🛠️ Self-service |
+
 ## 📁 File Structure
 
 ```
 whoop-mcp-server/
-├── src/
+├── src/                       # Python local installation
 │   ├── whoop_mcp_server.py    # Main MCP server
 │   ├── whoop_client.py        # WHOOP API client
 │   ├── auth_manager.py        # Token management
 │   └── config.py              # Configuration
-├── storage/
+├── smithery/                  # TypeScript Smithery deployment
+│   ├── src/
+│   │   ├── index.ts           # Smithery MCP server
+│   │   ├── whoop-client.ts    # TypeScript WHOOP client
+│   │   └── types.ts           # Type definitions
+│   ├── package.json           # Node.js dependencies
+│   └── smithery.yaml          # Smithery configuration
+├── storage/                   # Local installation only
 │   ├── tokens.json            # Encrypted tokens (auto-generated)
 │   └── .encryption_key        # Encryption key (auto-generated)
 ├── setup.py                   # Interactive setup script
