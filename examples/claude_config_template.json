@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "whoop": {
+      "command": "python",
+      "args": ["/FULL/PATH/TO/whoop-mcp-server/src/whoop_mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "/FULL/PATH/TO/whoop-mcp-server/src",
+        "LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}

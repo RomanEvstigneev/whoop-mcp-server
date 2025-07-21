@@ -1,0 +1,28 @@
+# Development dependencies for WHOOP MCP Server
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.10.0
+
+# Code quality
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.0.0
+
+# Security
+bandit>=1.7.0
+safety>=2.3.0
+
+# Build and distribution
+build>=0.10.0
+twine>=4.0.0
+
+# Documentation
+mkdocs>=1.4.0
+mkdocs-material>=9.0.0
+
+# Development utilities
+pre-commit>=3.0.0
