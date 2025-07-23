@@ -35,9 +35,3 @@ startCommand:
         default: 100
         minimum: 10
         maximum: 1000
-  exampleConfig:
-    accessToken: "your_whoop_access_token_here"
-    refreshToken: "your_whoop_refresh_token_here"
-    baseUrl: "https://api.prod.whoop.com/developer/v1"
-    cacheTimeout: 300
-    rateLimitPerMinute: 100
