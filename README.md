@@ -178,16 +178,17 @@ whoop-mcp-server/
 │   ├── whoop_client.py        # WHOOP API client
 │   ├── auth_manager.py        # Token management
 │   └── config.py              # Configuration
-├── smithery/                  # TypeScript Smithery deployment
-│   ├── src/
-│   │   ├── index.ts           # Smithery MCP server
-│   │   ├── whoop-client.ts    # TypeScript WHOOP client
-│   │   └── types.ts           # Type definitions
-│   ├── package.json           # Node.js dependencies
-│   └── smithery.yaml          # Smithery configuration
+├── smithery/                  # TypeScript source files
+│   └── src/
+│       ├── index.ts           # Smithery MCP server
+│       ├── whoop-client.ts    # TypeScript WHOOP client
+│       └── types.ts           # Type definitions
 ├── storage/                   # Local installation only
 │   ├── tokens.json            # Encrypted tokens (auto-generated)
 │   └── .encryption_key        # Encryption key (auto-generated)
+├── package.json               # Node.js dependencies (Smithery)
+├── smithery.yaml              # Smithery configuration (root required)
+├── tsconfig.json              # TypeScript configuration
 ├── setup.py                   # Interactive setup script
 └── requirements.txt           # Python dependencies
 ```

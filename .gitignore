@@ -145,4 +145,7 @@ logs/
 *.bak
 *.backup
 *.orig
-*.tmp
+*.tmpnode_modules/
+*.log
+.smithery/
+dist/

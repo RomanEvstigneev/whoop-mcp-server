@@ -34,7 +34,7 @@ This is the **Smithery-hosted version** of the WHOOP MCP Server, providing an al
 2. **Connect to Smithery**:
    - Sign up at [smithery.ai](https://smithery.ai)
    - Connect your GitHub account
-   - Deploy this `smithery/` directory
+   - Deploy the entire repository (Smithery config is in root)
 
 3. **Configure in Claude Desktop** with your deployment URL
 
@@ -110,6 +110,7 @@ Once configured, ask Claude:
 To develop this Smithery server locally:
 
 ```bash
+# From repository root (where smithery.yaml is located)
 # Install dependencies
 npm install
 
@@ -119,6 +120,8 @@ npm run dev
 # Build for production
 npm run build
 ```
+
+**Note**: The TypeScript source files are in `smithery/src/` but the configuration files (`smithery.yaml`, `package.json`, `tsconfig.json`) are in the repository root per Smithery requirements.
 
 ## 🔗 Links
 
