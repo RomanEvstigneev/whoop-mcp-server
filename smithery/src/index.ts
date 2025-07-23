@@ -10,14 +10,32 @@ import { z } from 'zod';
 import { WhoopClient } from './whoop-client.js';
 import { WhoopConfig } from './types.js';
 
-// Configuration schema validation
-const ConfigSchema = z.object({
-  accessToken: z.string().min(1, 'Access token is required'),
-  refreshToken: z.string().optional(),
-  baseUrl: z.string().url().default('https://api.prod.whoop.com/developer/v1'),
-  cacheTimeout: z.number().min(60).max(3600).default(300),
-  rateLimitPerMinute: z.number().min(10).max(1000).default(100)
+// Configuration schema for Smithery
+export const configSchema = z.object({
+  accessToken: z.string()
+    .min(1, 'Access token is required')
+    .describe('Your WHOOP API access token from OAuth authorization'),
+  refreshToken: z.string()
+    .optional()
+    .describe('Your WHOOP API refresh token for automatic renewal'),
+  baseUrl: z.string()
+    .url()
+    .default('https://api.prod.whoop.com/developer/v1')
+    .describe('WHOOP API base URL'),
+  cacheTimeout: z.number()
+    .min(60)
+    .max(3600)
+    .default(300)
+    .describe('How long to cache API responses (seconds)'),
+  rateLimitPerMinute: z.number()
+    .min(10)
+    .max(1000)
+    .default(100)
+    .describe('Maximum API requests per minute')
 });
+
+// Internal validation schema (same structure)
+const ConfigSchema = configSchema;
 
 export default function createServer({ config }: { config: any }) {
   // Validate configuration
