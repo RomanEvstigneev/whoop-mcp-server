@@ -145,7 +145,11 @@ logs/
 *.bak
 *.backup
 *.orig
-*.tmpnode_modules/
+*.tmp# Node.js dependencies and build artifacts
+node_modules/
 *.log
 .smithery/
 dist/
+
+# Keep package-lock.json for Smithery deployment
+# package-lock.json should be committed for reproducible builds
