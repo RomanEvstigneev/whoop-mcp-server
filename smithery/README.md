@@ -8,7 +8,10 @@ This is the **Smithery-hosted version** of the WHOOP MCP Server, providing an al
 
 ### Option 1: Use Hosted Server (Recommended)
 
-1. **Get your WHOOP tokens** from the [local setup guide](../README.md#3-setup)
+1. **Get your WHOOP tokens**:
+   - **Quick Link**: 👉 **[Authorize WHOOP Access](https://personal-integrations-462307.uc.r.appspot.com/)**
+   - After authorization, copy your `access_token` and `refresh_token` from the response
+   - Or follow the detailed [local setup guide](../README.md#3-setup)
 2. **Add to Claude Desktop** with your tokens:
 
 ```json

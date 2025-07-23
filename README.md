@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-green.svg)](https://modelcontextprotocol.io/)
+[![smithery badge](https://smithery.ai/badge/@RomanEvstigneev/whoop-mcp-server)](https://smithery.ai/server/@RomanEvstigneev/whoop-mcp-server)
 
 Transform your WHOOP fitness data into actionable insights through natural language queries in Claude Desktop. Ask questions about your workouts, recovery, sleep patterns, and more - all while keeping your data secure and private.
 
@@ -54,6 +55,8 @@ pip install -r requirements.txt
 
 ### 3. Setup
 
+#### Option A: Interactive Setup (Recommended)
+
 Run the interactive setup:
 ```bash
 python setup.py
@@ -63,6 +66,67 @@ This will:
 - Open your browser for WHOOP OAuth authorization
 - Securely save your tokens locally
 - Provide Claude Desktop configuration
+
+#### Option B: Manual WHOOP OAuth Setup
+
+If the interactive setup doesn't work, you can manually get your WHOOP tokens:
+
+1. **Open WHOOP OAuth Page**: 
+   👉 **[Click here to authorize WHOOP access](https://personal-integrations-462307.uc.r.appspot.com/)**
+
+2. **Authorize Your Account**:
+   - Log in with your WHOOP credentials
+   - Grant permissions for the requested scopes:
+     - `read:profile` - Access to your profile information
+     - `read:workout` - Access to workout data
+     - `read:recovery` - Access to recovery data
+     - `read:sleep` - Access to sleep data
+     - `offline` - Refresh token for continued access
+
+3. **Copy Authorization Code**:
+   - After authorization, you'll see a success page
+   - **Copy the entire authorization code** (long string starting with letters/numbers)
+   - It looks like: `ABC123...XYZ789` (much longer)
+
+4. **Exchange Code for Tokens**:
+   ```bash
+   python -c "
+   import sys
+   sys.path.insert(0, './src')
+   from auth_manager import TokenManager
+   import requests
+   
+   # Paste your authorization code here
+   auth_code = 'YOUR_AUTHORIZATION_CODE_HERE'
+   
+   # Exchange for tokens
+   url = f'https://personal-integrations-462307.uc.r.appspot.com/api/get-tokens/{auth_code}'
+   response = requests.get(url, timeout=30)
+   
+   if response.status_code == 200:
+       token_data = response.json()
+       if token_data.get('success'):
+           # Save tokens
+           token_manager = TokenManager()
+           token_manager.save_tokens(token_data)
+           print('✅ Tokens saved successfully!')
+       else:
+           print('❌ Token exchange failed')
+   else:
+       print(f'❌ HTTP Error: {response.status_code}')
+   "
+   ```
+
+5. **Verify Setup**:
+   ```bash
+   python -c "
+   import sys
+   sys.path.insert(0, './src')
+   from whoop_client import WhoopClient
+   client = WhoopClient()
+   print(f'✅ Auth status: {client.get_auth_status()}')
+   "
+   ```
 
 ### 4. Configure Claude Desktop
 
